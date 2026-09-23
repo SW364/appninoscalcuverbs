@@ -217,7 +217,7 @@ export default function PracticeScreen(cfg: PracticeConfig) {
 
         {/* Subject carousel */}
         <View style={styles.panel}>
-          <Text style={styles.panelTitle}>{cfg.t.chooseSubject}</Text>
+          <Text style={styles.panelTitle}>🧒  {cfg.t.chooseSubject}</Text>
           <DragCarousel
             testID="carousel-subject"
             data={cfg.subjects}
@@ -232,7 +232,7 @@ export default function PracticeScreen(cfg: PracticeConfig) {
 
         {/* Option carousel (auxiliary or tense) */}
         <View style={styles.panel}>
-          <Text style={styles.panelTitle}>{cfg.optionTitle}</Text>
+          <Text style={styles.panelTitle}>⭐  {cfg.optionTitle}</Text>
           <DragCarousel
             testID="carousel-option"
             data={cfg.options}
@@ -247,7 +247,7 @@ export default function PracticeScreen(cfg: PracticeConfig) {
 
         {/* Verb selector */}
         <View style={styles.panel}>
-          <Text style={styles.panelTitle}>{cfg.t.chooseVerb}</Text>
+          <Text style={styles.panelTitle}>✋  {cfg.t.chooseVerb}</Text>
           <Pressable
             testID="verb-selector-button"
             onPress={() => setVerbModal(true)}
@@ -301,7 +301,7 @@ export default function PracticeScreen(cfg: PracticeConfig) {
             </View>
 
             <View style={styles.row}>
-              <View style={[styles.card, styles.cardHalf]} testID="card-negative">
+              <View style={[styles.card, styles.cardHalf, { backgroundColor: colors.negativeBg }]} testID="card-negative">
                 <View style={[styles.tag, { backgroundColor: colors.negativeBg, alignSelf: "flex-start" }]}>
                   <Text style={[styles.tagText, { color: colors.negative }]}>{cfg.t.neg}</Text>
                 </View>
@@ -328,7 +328,7 @@ export default function PracticeScreen(cfg: PracticeConfig) {
                 )}
               </View>
 
-              <View style={[styles.card, styles.cardHalf]} testID="card-question">
+              <View style={[styles.card, styles.cardHalf, { backgroundColor: colors.questionBg }]} testID="card-question">
                 <View style={[styles.tag, { backgroundColor: colors.questionBg, alignSelf: "flex-start" }]}>
                   <Text style={[styles.tagText, { color: colors.question }]}>{cfg.t.que}</Text>
                 </View>
@@ -474,14 +474,14 @@ const styles = StyleSheet.create({
   headerTitle: { fontFamily: fonts.extrabold, fontSize: 20, color: colors.ink, textAlign: "center" },
   panel: {
     backgroundColor: colors.card,
-    borderRadius: radius.lg,
+    borderRadius: radius.xl,
     paddingVertical: spacing.md,
     marginBottom: spacing.md,
     ...shadow,
   },
   panelTitle: {
-    fontFamily: fonts.bold,
-    fontSize: 14,
+    fontFamily: fonts.extrabold,
+    fontSize: 15,
     color: colors.ink,
     textAlign: "center",
     marginBottom: spacing.sm,
@@ -510,16 +510,16 @@ const styles = StyleSheet.create({
     gap: 8,
     backgroundColor: colors.primary,
     borderRadius: radius.pill,
-    paddingVertical: 15,
+    paddingVertical: 18,
     shadowColor: colors.primary,
     shadowOpacity: 0.35,
     shadowRadius: 12,
     shadowOffset: { width: 0, height: 6 },
     elevation: 5,
   },
-  generateText: { fontFamily: fonts.extrabold, fontSize: 17, color: "#fff" },
-  card: { backgroundColor: colors.card, borderRadius: radius.lg, padding: spacing.md, ...shadow },
-  cardAff: { alignItems: "center", marginBottom: spacing.md },
+  generateText: { fontFamily: fonts.extrabold, fontSize: 19, color: "#fff" },
+  card: { backgroundColor: colors.card, borderRadius: radius.xl, padding: spacing.md, ...shadow },
+  cardAff: { alignItems: "center", marginBottom: spacing.md, backgroundColor: colors.affirmativeBg },
   cardHeaderRow: {
     flexDirection: "row",
     alignItems: "center",
@@ -532,8 +532,8 @@ const styles = StyleSheet.create({
   row: { flexDirection: "row", gap: spacing.md },
   cardHalf: { flex: 1 },
   sentence: {
-    fontFamily: fonts.bold,
-    fontSize: 22,
+    fontFamily: fonts.extrabold,
+    fontSize: 26,
     color: colors.ink,
     textAlign: "center",
     marginTop: spacing.sm,

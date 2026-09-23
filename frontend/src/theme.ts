@@ -1,18 +1,18 @@
 export const colors = {
-  bgTop: "#EEF2FE",
-  bgBottom: "#F7F5FF",
+  bgTop: "#FFF7EC",
+  bgBottom: "#EAF2FF",
   card: "#FFFFFF",
-  ink: "#2A2E45",
-  inkSoft: "#8A90A6",
-  primary: "#4A7DF0",
-  affirmative: "#22B573",
-  affirmativeBg: "#E7F8EF",
-  negative: "#F0574A",
-  negativeBg: "#FDECEA",
-  question: "#3B82F6",
-  questionBg: "#E8F0FE",
-  frame: "#4A7DF0",
-  border: "#EBEDF5",
+  ink: "#34324A",
+  inkSoft: "#9AA0B4",
+  primary: "#FF7A59",
+  affirmative: "#2FC38A",
+  affirmativeBg: "#E4FAF1",
+  negative: "#FF6B6B",
+  negativeBg: "#FFE9E9",
+  question: "#4C9AFF",
+  questionBg: "#E7F1FF",
+  frame: "#FF7A59",
+  border: "#EFEBF6",
 };
 
 export const fonts = {
@@ -34,5 +34,6 @@ export const radius = {
   sm: 12,
   md: 18,
   lg: 24,
+  xl: 32,
   pill: 999,
 };

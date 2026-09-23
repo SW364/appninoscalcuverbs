@@ -13,6 +13,7 @@ import { STRINGS, uiLangOf, MODULE_TITLES } from "@/src/i18n";
 type Module = {
   code: string;
   icon: keyof typeof Ionicons.glyphMap;
+  emoji?: string;
   color: string;
   bg: string;
   route?: string;
@@ -21,10 +22,10 @@ type Module = {
 };
 
 const MODULES: Module[] = [
-  { code: "M1.A", icon: "eye", color: "#4A7DF0", bg: "#E8F1FC", route: "/m1a", tenses: 5 },
-  { code: "M1.B", icon: "flower", color: "#1FB6A6", bg: "#E4F6F3", route: "/m1b", tenses: 5 },
-  { code: "Tita I", icon: "cube", color: "#EC4899", bg: "#FCE7F1", route: "/tita1", badge: "Nuevo", tenses: 2 },
-  { code: "Tita II", icon: "time", color: "#3B82F6", bg: "#E7F0FD", route: "/tita2", badge: "Nuevo", tenses: 2 },
+  { code: "M1.A", icon: "eye", emoji: "👀", color: "#4A7DF0", bg: "#E8F1FC", route: "/m1a", tenses: 5 },
+  { code: "M1.B", icon: "flower", emoji: "🐝", color: "#1FB6A6", bg: "#E4F6F3", route: "/m1b", tenses: 5 },
+  { code: "Tita I", icon: "cube", emoji: "🎁", color: "#EC4899", bg: "#FCE7F1", route: "/tita1", badge: "Nuevo", tenses: 2 },
+  { code: "Tita II", icon: "time", emoji: "⏰", color: "#3B82F6", bg: "#E7F0FD", route: "/tita2", badge: "Nuevo", tenses: 2 },
 ];
 
 export default function Modules() {
@@ -64,6 +65,7 @@ export default function Modules() {
           <View style={{ flex: 1 }} />
         </View>
 
+        <Text style={styles.mascot}>🦉</Text>
         <Text style={styles.title}>{t.homeTitle}</Text>
         <Text style={styles.subtitle}>{t.homeSubtitle}</Text>
 
@@ -73,7 +75,7 @@ export default function Modules() {
               key={m.code}
               testID={`module-${m.code}`}
               onPress={() => m.route && router.push(m.route as any)}
-              style={({ pressed }) => [styles.cardModule, { backgroundColor: m.bg }, pressed && { transform: [{ scale: 0.97 }] }]}
+              style={({ pressed }) => [styles.cardModule, { backgroundColor: m.bg }, pressed && { transform: [{ scale: 0.96 }] }]}
             >
               {m.badge ? (
                 <View style={styles.badge}>
@@ -81,7 +83,11 @@ export default function Modules() {
                 </View>
               ) : null}
               <View style={[styles.iconCircle, { backgroundColor: m.color }]}>
-                <Ionicons name={m.icon} size={22} color="#fff" />
+                {m.emoji ? (
+                  <Text style={styles.moduleEmoji}>{m.emoji}</Text>
+                ) : (
+                  <Ionicons name={m.icon} size={24} color="#fff" />
+                )}
               </View>
               <Text style={[styles.moduleCode, { color: m.color }]}>{m.code}</Text>
               <Text style={styles.moduleTitle} numberOfLines={2}>
@@ -93,7 +99,9 @@ export default function Modules() {
                 </View>
                 <Text style={styles.tensesText}>{`${m.tenses} ${t.tenses}`}</Text>
                 <View style={{ flex: 1 }} />
-                <Ionicons name="chevron-forward" size={18} color={m.color} />
+                <View style={[styles.goCircle, { backgroundColor: m.color }]}>
+                  <Ionicons name="arrow-forward" size={15} color="#fff" />
+                </View>
               </View>
             </Pressable>
           ))}
@@ -145,14 +153,17 @@ const styles = StyleSheet.create({
     alignItems: "center", justifyContent: "center",
     shadowColor: "#8A90A6", shadowOpacity: 0.18, shadowRadius: 8, shadowOffset: { width: 0, height: 3 }, elevation: 3,
   },
-  title: { fontFamily: fonts.extrabold, fontSize: 30, color: colors.ink, textAlign: "center" },
-  subtitle: { fontFamily: fonts.regular, fontSize: 14, color: colors.inkSoft, textAlign: "center", marginTop: 2, marginBottom: spacing.lg },
+  title: { fontFamily: fonts.extrabold, fontSize: 34, color: colors.ink, textAlign: "center" },
+  mascot: { fontSize: 52, textAlign: "center", marginTop: spacing.xs },
+  subtitle: { fontFamily: fonts.bold, fontSize: 15, color: colors.inkSoft, textAlign: "center", marginTop: 2, marginBottom: spacing.lg },
   grid: { flexDirection: "row", flexWrap: "wrap", justifyContent: "space-between" },
-  cardModule: { width: "48%", borderRadius: radius.lg, padding: spacing.md, marginBottom: spacing.md, minHeight: 168 },
-  iconCircle: { width: 46, height: 46, borderRadius: 23, alignItems: "center", justifyContent: "center", marginBottom: spacing.sm },
-  moduleCode: { fontFamily: fonts.extrabold, fontSize: 22 },
-  moduleTitle: { fontFamily: fonts.semibold, fontSize: 13, color: colors.inkSoft, marginTop: 2 },
+  cardModule: { width: "48%", borderRadius: radius.xl, padding: spacing.md, marginBottom: spacing.md, minHeight: 190 },
+  iconCircle: { width: 60, height: 60, borderRadius: 30, alignItems: "center", justifyContent: "center", marginBottom: spacing.sm },
+  moduleEmoji: { fontSize: 32 },
+  moduleCode: { fontFamily: fonts.extrabold, fontSize: 24 },
+  moduleTitle: { fontFamily: fonts.bold, fontSize: 14, color: colors.inkSoft, marginTop: 2 },
   footerRow: { flexDirection: "row", alignItems: "center", gap: 8, marginTop: "auto", paddingTop: spacing.sm },
+  goCircle: { width: 30, height: 30, borderRadius: 15, alignItems: "center", justifyContent: "center" },
   hPill: {
     backgroundColor: "rgba(255,255,255,0.75)",
     paddingHorizontal: 8,
