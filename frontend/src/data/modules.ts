@@ -3,7 +3,7 @@ import { STRINGS, uiLangOf, MODULE_TITLES } from "@/src/i18n";
 import { PracticeConfig } from "@/src/components/PracticeScreen";
 import { colors } from "@/src/theme";
 
-import { SUBJECTS, REGULAR_VERBS, IRREGULAR_VERBS } from "@/src/data/verbs";
+import { SUBJECTS } from "@/src/data/verbs";
 import {
   AUX_OPTIONS, TENSES, TENSES_PROG,
   buildM1A, buildM1B, buildM2A, buildM2B, buildM3A, buildM4A,
@@ -27,6 +27,16 @@ const ACCENT: Record<Id, string> = {
   m2a: "#8B5CF6", m2b: "#F0654A", m3a: "#8B5CF6", m4a: "#22B573",
 };
 
+// Kids version — content built around the 5 human senses.
+const SENSES_EN = ["see", "touch", "smell", "taste", "hear"];
+const SENSES_ES = ["ver", "tocar", "oler", "saborear", "oír"];
+const SENSE_ICONS_EN: Record<string, string> = {
+  see: "eye", touch: "hand-left", smell: "flower", taste: "fast-food", hear: "volume-high",
+};
+const SENSE_ICONS_ES: Record<string, string> = {
+  ver: "eye", tocar: "hand-left", oler: "flower", saborear: "fast-food", "oír": "volume-high",
+};
+
 export function getPracticeConfig(id: Id, learn: LearnLang, mixed = false): PracticeConfig {
   const cfg = buildBase(id, learn);
   if (mixed) cfg.mixed = makeReference(id as ModuleId, learn);
@@ -48,16 +58,18 @@ function buildBase(id: Id, learn: LearnLang): PracticeConfig {
       return {
         moduleLabel, title, t, subjects,
         optionTitle: t.chooseAux, options: es ? AUX_OPTIONS_ES : AUX_OPTIONS, optionItemWidth: 94, optionAccent: ACCENT.m1a,
-        ...(es
-          ? { verbs: ES_VERBS, defaultVerb: "cortar", build: buildM1AEs }
-          : { divided: { regular: REGULAR_VERBS, irregular: IRREGULAR_VERBS }, defaultVerb: "cut", build: buildM1A }),
+        verbs: es ? SENSES_ES : SENSES_EN,
+        verbIcons: es ? SENSE_ICONS_ES : SENSE_ICONS_EN,
+        defaultVerb: es ? "ver" : "see",
+        build: es ? buildM1AEs : buildM1A,
       };
     case "m1b":
       return {
         moduleLabel, title, t, subjects,
         optionTitle: t.chooseAux, options: es ? AUX_OPTIONS_ES : AUX_OPTIONS, optionItemWidth: 94, optionAccent: ACCENT.m1b,
-        verbs: es ? ES_VERBS : M1A_VERBS,
-        defaultVerb: es ? "cortar" : "add",
+        verbs: es ? SENSES_ES : SENSES_EN,
+        verbIcons: es ? SENSE_ICONS_ES : SENSE_ICONS_EN,
+        defaultVerb: es ? "ver" : "see",
         build: es ? buildM1BEs : buildM1B,
       };
     case "m2a":

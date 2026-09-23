@@ -21,13 +21,9 @@ type Module = {
 };
 
 const MODULES: Module[] = [
-  { code: "M1.A", icon: "book", color: "#4A7DF0", bg: "#E8F1FC", route: "/m1a", tenses: 9 },
-  { code: "M1.B", icon: "chatbubble-ellipses", color: "#1FB6A6", bg: "#E4F6F3", route: "/m1b", tenses: 9 },
-  { code: "M2.A", icon: "create", color: "#F5A623", bg: "#FDF3E1", route: "/m2a", tenses: 4 },
-  { code: "M2.B", icon: "flash", color: "#F0654A", bg: "#FDECE8", route: "/m2b", tenses: 4 },
-  { code: "M3.A", icon: "star", color: "#8B5CF6", bg: "#F0EAFB", route: "/m3a", tenses: 4 },
+  { code: "M1.A", icon: "eye", color: "#4A7DF0", bg: "#E8F1FC", route: "/m1a", tenses: 5 },
+  { code: "M1.B", icon: "flower", color: "#1FB6A6", bg: "#E4F6F3", route: "/m1b", tenses: 5 },
   { code: "Tita I", icon: "cube", color: "#EC4899", bg: "#FCE7F1", route: "/tita1", badge: "Nuevo", tenses: 2 },
-  { code: "M4.A", icon: "flag", color: "#22B573", bg: "#E7F8EF", route: "/m4a", tenses: 4 },
   { code: "Tita II", icon: "time", color: "#3B82F6", bg: "#E7F0FD", route: "/tita2", badge: "Nuevo", tenses: 2 },
 ];
 

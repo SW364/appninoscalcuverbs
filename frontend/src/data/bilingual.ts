@@ -65,7 +65,7 @@ const EN2ES_VERB: Record<string, string> = {
   save: "guardar", scream: "gritar", search: "buscar", skate: "patinar",
   sky: "volar", smell: "oler", snore: "roncar", start: "empezar",
   stay: "quedar", stop: "parar", study: "estudiar", survive: "sobrevivir",
-  talk: "hablar", thank: "agradecer", touch: "tocar", try: "intentar",
+  talk: "hablar", taste: "saborear", thank: "agradecer", touch: "tocar", try: "intentar",
   use: "usar", visit: "visitar", wait: "esperar", walk: "caminar",
   want: "querer", warn: "advertir", wash: "lavar", watch: "mirar",
   work: "trabajar",
@@ -76,7 +76,7 @@ const EN2ES_VERB: Record<string, string> = {
   drink: "beber", drive: "conducir", eat: "comer", fall: "caer",
   feed: "alimentar", feel: "sentir", fight: "pelear", find: "encontrar",
   fly: "volar", forget: "olvidar", freeze: "congelar", give: "dar",
-  go: "ir", grow: "crecer", have: "tener", hear: "oir",
+  go: "ir", grow: "crecer", have: "tener", hear: "oír",
   hurt: "lastimar", keep: "guardar", know: "saber", lay: "poner",
   leave: "salir", lend: "prestar", lie: "mentir", lose: "perder",
   make: "hacer", meet: "conocer", pay: "pagar", put: "poner",
@@ -121,6 +121,7 @@ const ES2EN_VERB: Record<string, string> = {
   venir: "come", ver: "see", dar: "give", saber: "know",
   salir: "leave", traer: "bring", dormir: "sleep", jugar: "play",
   cortar: "cut", leer: "read",
+  tocar: "touch", oler: "smell", saborear: "taste", "oír": "hear", oir: "hear",
 };
 
 function translateSubject(label: string, to: LearnLang): string {

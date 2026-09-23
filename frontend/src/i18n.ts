@@ -89,8 +89,8 @@ export const STRINGS: Record<"en" | "es", UIStrings> = {
 // Module card titles per learning language (shown on Home).
 export const MODULE_TITLES: Record<LearnLang, Record<string, string>> = {
   en: {
-    "M1.A": "Verbos Básicos",
-    "M1.B": "Tiempos continuos",
+    "M1.A": "Los 5 sentidos",
+    "M1.B": "Sentidos continuos",
     "M2.A": "Tiempos verbales",
     "M2.B": "Tiempos continuos",
     "M3.A": "Verbos regulares",
@@ -99,8 +99,8 @@ export const MODULE_TITLES: Record<LearnLang, Record<string, string>> = {
     "Tita II": "There was / There were",
   },
   es: {
-    "M1.A": "Basic verbs",
-    "M1.B": "Continuous tenses",
+    "M1.A": "The 5 senses",
+    "M1.B": "Senses (continuous)",
     "M2.A": "Verb tenses",
     "M2.B": "Continuous tenses",
     "M3.A": "Regular verbs",

@@ -37,6 +37,7 @@ export type PracticeConfig = {
   optionItemWidth: number;
   optionAccent: string;
   verbs?: string[];
+  verbIcons?: Record<string, string>;
   divided?: { regular: string[]; irregular: string[] };
   defaultVerb: string;
   build: (subjectLabel: string, optionKey: string, verb: string) => Trio;
@@ -247,6 +248,9 @@ export default function PracticeScreen(cfg: PracticeConfig) {
             onPress={() => setVerbModal(true)}
             style={({ pressed }) => [styles.verbButton, pressed && { opacity: 0.85 }]}
           >
+            {cfg.verbIcons ? (
+              <Ionicons name={cfg.verbIcons[verb] as any} size={22} color={colors.question} />
+            ) : null}
             <Text style={styles.verbButtonText}>{cap(verb)}</Text>
             <Ionicons name="chevron-down" size={20} color={colors.question} />
           </Pressable>
@@ -373,23 +377,26 @@ export default function PracticeScreen(cfg: PracticeConfig) {
             ) : (
               <Text style={styles.sheetTitle}>{cfg.t.sheetTitle}</Text>
             )}
-            <View style={styles.searchBox}>
-              <Ionicons name="search" size={18} color={colors.inkSoft} />
-              <TextInput
-                testID="verb-search"
-                placeholder={cfg.t.search}
-                placeholderTextColor={colors.inkSoft}
-                value={search}
-                onChangeText={setSearch}
-                style={styles.searchInput}
-                autoCorrect={false}
-                autoCapitalize="none"
-              />
-            </View>
+            {!cfg.verbIcons ? (
+              <View style={styles.searchBox}>
+                <Ionicons name="search" size={18} color={colors.inkSoft} />
+                <TextInput
+                  testID="verb-search"
+                  placeholder={cfg.t.search}
+                  placeholderTextColor={colors.inkSoft}
+                  value={search}
+                  onChangeText={setSearch}
+                  style={styles.searchInput}
+                  autoCorrect={false}
+                  autoCapitalize="none"
+                />
+              </View>
+            ) : null}
             <FlatList
+              key={cfg.verbIcons ? "icons" : "plain"}
               data={verbList}
               keyExtractor={(item) => item}
-              numColumns={3}
+              numColumns={cfg.verbIcons ? 2 : 3}
               keyboardShouldPersistTaps="handled"
               showsVerticalScrollIndicator={false}
               columnWrapperStyle={{ gap: 8 }}
@@ -397,7 +404,7 @@ export default function PracticeScreen(cfg: PracticeConfig) {
               renderItem={({ item }) => (
                 <Pressable
                   testID={`verb-option-${item}`}
-                  style={[styles.verbChip, item === verb && styles.verbChipActive]}
+                  style={[styles.verbChip, cfg.verbIcons && styles.verbChipTall, item === verb && styles.verbChipActive]}
                   onPress={() => {
                     Haptics.selectionAsync().catch(() => {});
                     setVerb(item);
@@ -405,7 +412,15 @@ export default function PracticeScreen(cfg: PracticeConfig) {
                     setSearch("");
                   }}
                 >
-                  <Text style={[styles.verbChipText, item === verb && styles.verbChipTextActive]}>
+                  {cfg.verbIcons ? (
+                    <Ionicons
+                      name={cfg.verbIcons[item] as any}
+                      size={28}
+                      color={item === verb ? "#fff" : colors.question}
+                      style={{ marginBottom: 6 }}
+                    />
+                  ) : null}
+                  <Text style={[styles.verbChipText, cfg.verbIcons && styles.verbChipTextLg, item === verb && styles.verbChipTextActive]}>
                     {cap(item)}
                   </Text>
                 </Pressable>
@@ -609,6 +624,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 4,
   },
   verbChipActive: { backgroundColor: colors.question },
+  verbChipTall: { minHeight: 92, paddingVertical: 14 },
   verbChipText: { fontFamily: fonts.bold, fontSize: 14, color: colors.ink, textAlign: "center" },
+  verbChipTextLg: { fontSize: 17, fontFamily: fonts.extrabold },
   verbChipTextActive: { color: "#fff", fontFamily: fonts.extrabold },
 });
