@@ -38,6 +38,7 @@ export type PracticeConfig = {
   optionAccent: string;
   verbs?: string[];
   verbIcons?: Record<string, string>;
+  verbEmojis?: Record<string, string>;
   divided?: { regular: string[]; irregular: string[] };
   defaultVerb: string;
   build: (subjectLabel: string, optionKey: string, verb: string) => Trio;
@@ -123,6 +124,7 @@ export default function PracticeScreen(cfg: PracticeConfig) {
   const [subj, setSubj] = useState(0);
   const [opt, setOpt] = useState(0);
   const [verb, setVerb] = useState<string>(cfg.defaultVerb);
+  const [shownVerb, setShownVerb] = useState<string>(cfg.defaultVerb);
   const [verbModal, setVerbModal] = useState(false);
   const [verbTab, setVerbTab] = useState<"regular" | "irregular">("regular");
   const [search, setSearch] = useState("");
@@ -139,6 +141,7 @@ export default function PracticeScreen(cfg: PracticeConfig) {
     const s = cfg.subjects[0].label;
     const k = cfg.options[0].key;
     setCards(cfg.build(s, k, cfg.defaultVerb));
+    setShownVerb(cfg.defaultVerb);
     setRefCards(cfg.mixed ? cfg.mixed.build(s, k, cfg.defaultVerb) : null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cfg.mixed]);
@@ -155,6 +158,7 @@ export default function PracticeScreen(cfg: PracticeConfig) {
     const s = cfg.subjects[subj].label;
     const k = cfg.options[opt].key;
     setCards(cfg.build(s, k, verb));
+    setShownVerb(verb);
     setRefCards(cfg.mixed ? cfg.mixed.build(s, k, verb) : null);
   }, [cfg, subj, opt, verb]);
 
@@ -175,6 +179,7 @@ export default function PracticeScreen(cfg: PracticeConfig) {
     : cfg.verbs ?? [];
   const q = search.trim().toLowerCase();
   const verbList = q ? base.filter((v) => v.includes(q)) : base;
+  const emoji = cfg.verbEmojis ? cfg.verbEmojis[shownVerb] ?? "" : "";
 
   return (
     <LinearGradient colors={[colors.bgTop, colors.bgBottom]} style={styles.flex}>
@@ -283,12 +288,16 @@ export default function PracticeScreen(cfg: PracticeConfig) {
                   {refCards.affirmative.full}
                 </Text>
               ) : null}
-              <SpeakButton
-                onPress={() => speak(cards.affirmative.full)}
-                color={colors.affirmative}
-                bg={colors.affirmativeBg}
-                testID="speak-affirmative"
-              />
+              {cfg.verbEmojis ? (
+                <Text style={styles.bigEmoji} testID="verb-emoji-affirmative">{emoji}</Text>
+              ) : (
+                <SpeakButton
+                  onPress={() => speak(cards.affirmative.full)}
+                  color={colors.affirmative}
+                  bg={colors.affirmativeBg}
+                  testID="speak-affirmative"
+                />
+              )}
             </View>
 
             <View style={styles.row}>
@@ -307,12 +316,16 @@ export default function PracticeScreen(cfg: PracticeConfig) {
                     {refCards.negative.full}
                   </Text>
                 ) : null}
-                <SpeakButton
-                  onPress={() => speak(cards.negative.full)}
-                  color={colors.negative}
-                  bg={colors.negativeBg}
-                  testID="speak-negative"
-                />
+                {cfg.verbEmojis ? (
+                  <Text style={styles.smallEmoji} testID="verb-emoji-negative">{emoji}</Text>
+                ) : (
+                  <SpeakButton
+                    onPress={() => speak(cards.negative.full)}
+                    color={colors.negative}
+                    bg={colors.negativeBg}
+                    testID="speak-negative"
+                  />
+                )}
               </View>
 
               <View style={[styles.card, styles.cardHalf]} testID="card-question">
@@ -330,12 +343,16 @@ export default function PracticeScreen(cfg: PracticeConfig) {
                     {refCards.question.full}
                   </Text>
                 ) : null}
-                <SpeakButton
-                  onPress={() => speak(cards.question.full)}
-                  color={colors.question}
-                  bg={colors.questionBg}
-                  testID="speak-question"
-                />
+                {cfg.verbEmojis ? (
+                  <Text style={styles.smallEmoji} testID="verb-emoji-question">{emoji}</Text>
+                ) : (
+                  <SpeakButton
+                    onPress={() => speak(cards.question.full)}
+                    color={colors.question}
+                    bg={colors.questionBg}
+                    testID="speak-question"
+                  />
+                )}
               </View>
             </View>
           </View>
@@ -568,6 +585,8 @@ const styles = StyleSheet.create({
     marginTop: spacing.md,
     alignSelf: "center",
   },
+  bigEmoji: { fontSize: 52, marginTop: spacing.md, alignSelf: "center" },
+  smallEmoji: { fontSize: 30, marginTop: spacing.sm, alignSelf: "flex-start" },
   modalBackdrop: { flex: 1, backgroundColor: "rgba(20,22,40,0.4)", justifyContent: "flex-end" },
   sheet: {
     height: "82%",

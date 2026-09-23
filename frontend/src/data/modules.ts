@@ -36,6 +36,12 @@ const SENSE_ICONS_EN: Record<string, string> = {
 const SENSE_ICONS_ES: Record<string, string> = {
   ver: "eye", tocar: "hand-left", oler: "flower", saborear: "fast-food", "oír": "volume-high",
 };
+const SENSE_EMOJI_EN: Record<string, string> = {
+  see: "👀", touch: "✋", smell: "👃", taste: "👅", hear: "👂",
+};
+const SENSE_EMOJI_ES: Record<string, string> = {
+  ver: "👀", tocar: "✋", oler: "👃", saborear: "👅", "oír": "👂",
+};
 
 export function getPracticeConfig(id: Id, learn: LearnLang, mixed = false): PracticeConfig {
   const cfg = buildBase(id, learn);
@@ -60,6 +66,7 @@ function buildBase(id: Id, learn: LearnLang): PracticeConfig {
         optionTitle: t.chooseAux, options: es ? AUX_OPTIONS_ES : AUX_OPTIONS, optionItemWidth: 94, optionAccent: ACCENT.m1a,
         verbs: es ? SENSES_ES : SENSES_EN,
         verbIcons: es ? SENSE_ICONS_ES : SENSE_ICONS_EN,
+        verbEmojis: es ? SENSE_EMOJI_ES : SENSE_EMOJI_EN,
         defaultVerb: es ? "ver" : "see",
         build: es ? buildM1AEs : buildM1A,
       };
@@ -69,6 +76,7 @@ function buildBase(id: Id, learn: LearnLang): PracticeConfig {
         optionTitle: t.chooseAux, options: es ? AUX_OPTIONS_ES : AUX_OPTIONS, optionItemWidth: 94, optionAccent: ACCENT.m1b,
         verbs: es ? SENSES_ES : SENSES_EN,
         verbIcons: es ? SENSE_ICONS_ES : SENSE_ICONS_EN,
+        verbEmojis: es ? SENSE_EMOJI_ES : SENSE_EMOJI_EN,
         defaultVerb: es ? "ver" : "see",
         build: es ? buildM1BEs : buildM1B,
       };
