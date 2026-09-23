@@ -95,12 +95,13 @@ export default function Modules() {
               </Text>
               <View style={styles.footerRow}>
                 <View style={styles.hPill}>
-                  <Text style={[styles.hPillText, { color: m.color }]}>{`H${m.tenses}`}</Text>
+                  <Text style={[styles.hPillText, { color: m.color }]} numberOfLines={1}>
+                    {`${m.tenses} ${t.tenses}`}
+                  </Text>
                 </View>
-                <Text style={styles.tensesText}>{`${m.tenses} ${t.tenses}`}</Text>
                 <View style={{ flex: 1 }} />
                 <View style={[styles.goCircle, { backgroundColor: m.color }]}>
-                  <Ionicons name="arrow-forward" size={15} color="#fff" />
+                  <Ionicons name="chevron-forward" size={15} color="#fff" />
                 </View>
               </View>
             </Pressable>
@@ -163,7 +164,7 @@ const styles = StyleSheet.create({
   moduleCode: { fontFamily: fonts.extrabold, fontSize: 24 },
   moduleTitle: { fontFamily: fonts.bold, fontSize: 14, color: colors.inkSoft, marginTop: 2 },
   footerRow: { flexDirection: "row", alignItems: "center", gap: 8, marginTop: "auto", paddingTop: spacing.sm },
-  goCircle: { width: 30, height: 30, borderRadius: 15, alignItems: "center", justifyContent: "center" },
+  goCircle: { width: 26, height: 26, borderRadius: 13, alignItems: "center", justifyContent: "center", flexShrink: 0 },
   hPill: {
     backgroundColor: "rgba(255,255,255,0.75)",
     paddingHorizontal: 8,
