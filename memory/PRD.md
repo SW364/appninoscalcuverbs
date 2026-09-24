@@ -42,3 +42,13 @@ App educativa de gramática EN/ES/Mixto. El usuario pidió convertirla en la
 - Nueva pantalla `app/videos.tsx`: 2 videos por separado (Lección 1 y 2) con expo-video.
 - Dependencia añadida: expo-video (+ config plugin en app.json).
 - Verificado por testing_agent (iteration_4): 6/6 checks OK.
+
+## Actualización (2026-09-24) — Expo SDK 54 → 57
+- Actualizado con el flujo oficial: `expo install expo@^57` + `expo install --fix`.
+- Versiones clave: expo ^57.0.0, react-native 0.86.3, react 19.2.3, expo-router 57.0.22,
+  react-native-reanimated 4.5.1, worklets 0.10.1, expo-video 57.0.4, expo-audio 57.0.5.
+- app.json: removidas `newArchEnabled` y `android.edgeToEdgeEnabled` (inválidas en SDK 57).
+- Regenerado yarn.lock (se restauró consistencia con yarn; eliminado package-lock.json).
+- expo-doctor: 19/20 (único aviso restante = carpeta android/ prebuild ya existente, no bloquea).
+- Verificado por testing_agent (iteration_5): sin errores de runtime, todas las pantallas OK.
+- Ahora compatible con Expo Go SDK 57.

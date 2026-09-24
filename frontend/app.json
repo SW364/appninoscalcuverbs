@@ -7,7 +7,6 @@
     "icon": "./assets/images/icon.png",
     "scheme": "calcuverbs",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.calcuverbs.app"
@@ -17,7 +16,6 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#000000"
       },
-      "edgeToEdgeEnabled": true,
       "package": "com.calcuverbs.app",
       "permissions": [
         "android.permission.RECORD_AUDIO",
@@ -42,7 +40,12 @@
       ],
       "expo-audio",
       "expo-asset",
-      "expo-video"
+      "expo-video",
+      "expo-font",
+      "expo-image",
+      "expo-secure-store",
+      "expo-status-bar",
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true
