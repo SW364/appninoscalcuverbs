@@ -35,3 +35,10 @@ App educativa de gramática EN/ES/Mixto. El usuario pidió convertirla en la
 ## Backlog / próximos
 - P1: pronunciación automática al generar; imágenes/ilustración por sentido.
 - P2: modo juego/quiz de sentidos; recompensas para niños.
+
+## Actualización (2026-09-24) — English-only + Videos
+- App bloqueada a Inglés: `LanguageContext` fuerza learn="en", mixed=false.
+- Menú superior (home): solo "Inglés" (✓) + entrada "Videos". Quitados Español y modos Mixto.
+- Nueva pantalla `app/videos.tsx`: 2 videos por separado (Lección 1 y 2) con expo-video.
+- Dependencia añadida: expo-video (+ config plugin en app.json).
+- Verificado por testing_agent (iteration_4): 6/6 checks OK.

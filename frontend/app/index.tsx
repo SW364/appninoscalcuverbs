@@ -7,7 +7,7 @@ import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 
 import { colors, fonts, spacing, radius } from "@/src/theme";
-import { useLanguage, LearnLang } from "@/src/context/LanguageContext";
+import { useLanguage } from "@/src/context/LanguageContext";
 import { STRINGS, uiLangOf, MODULE_TITLES } from "@/src/i18n";
 
 type Module = {
@@ -31,21 +31,9 @@ const MODULES: Module[] = [
 export default function Modules() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
-  const { lang, setLang, mixed, setMixed } = useLanguage();
+  const { lang } = useLanguage();
   const t = STRINGS[uiLangOf(lang)];
   const [menuOpen, setMenuOpen] = useState(false);
-
-  const pickLang = (l: LearnLang) => {
-    setLang(l);
-    setMixed(false);
-    setMenuOpen(false);
-  };
-
-  const pickMixed = (l: LearnLang) => {
-    setLang(l);
-    setMixed(true);
-    setMenuOpen(false);
-  };
 
   return (
     <LinearGradient colors={[colors.bgTop, colors.bgBottom]} style={styles.flex}>
@@ -114,30 +102,25 @@ export default function Modules() {
         <Pressable style={styles.menuBackdrop} onPress={() => setMenuOpen(false)}>
           <View style={[styles.menuCard, { top: insets.top + 58 }]}>
             <Text style={styles.menuTitle}>{t.languageMenu}</Text>
-            <Pressable testID="lang-english" style={styles.menuItem} onPress={() => pickLang("en")}>
+            <View style={styles.menuItem} testID="lang-english">
               <View style={styles.codeBadge}><Text style={styles.codeBadgeText}>EN</Text></View>
               <Text style={styles.menuItemText}>{t.langEnglish}</Text>
-              {!mixed && lang === "en" ? <Ionicons name="checkmark-circle" size={20} color={colors.primary} /> : null}
-            </Pressable>
+              <Ionicons name="checkmark-circle" size={20} color={colors.primary} />
+            </View>
             <View style={styles.menuDivider} />
-            <Pressable testID="lang-spanish" style={styles.menuItem} onPress={() => pickLang("es")}>
-              <View style={styles.codeBadge}><Text style={styles.codeBadgeText}>ES</Text></View>
-              <Text style={styles.menuItemText}>{t.langSpanish}</Text>
-              {!mixed && lang === "es" ? <Ionicons name="checkmark-circle" size={20} color={colors.primary} /> : null}
-            </Pressable>
-
-            <View style={styles.menuDivider} />
-            <Text style={styles.menuSection}>🌎 {t.langMixed}</Text>
-            <Pressable testID="lang-mixed-en-es" style={styles.menuItem} onPress={() => pickMixed("en")}>
-              <View style={styles.codeBadge}><Text style={styles.codeBadgeText}>EN→ES</Text></View>
-              <Text style={styles.menuItemText}>{t.mixedEnEs}</Text>
-              {mixed && lang === "en" ? <Ionicons name="checkmark-circle" size={20} color={colors.primary} /> : null}
-            </Pressable>
-            <View style={styles.menuDivider} />
-            <Pressable testID="lang-mixed-es-en" style={styles.menuItem} onPress={() => pickMixed("es")}>
-              <View style={styles.codeBadge}><Text style={styles.codeBadgeText}>ES→EN</Text></View>
-              <Text style={styles.menuItemText}>{t.mixedEsEn}</Text>
-              {mixed && lang === "es" ? <Ionicons name="checkmark-circle" size={20} color={colors.primary} /> : null}
+            <Pressable
+              testID="menu-videos"
+              style={styles.menuItem}
+              onPress={() => {
+                setMenuOpen(false);
+                router.push("/videos");
+              }}
+            >
+              <View style={[styles.codeBadge, { backgroundColor: colors.negativeBg }]}>
+                <Ionicons name="play" size={14} color={colors.negative} />
+              </View>
+              <Text style={styles.menuItemText}>Videos</Text>
+              <Ionicons name="chevron-forward" size={18} color={colors.inkSoft} />
             </Pressable>
           </View>
         </Pressable>

@@ -21,12 +21,9 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [mixed, setMixedState] = useState<boolean>(false);
 
   useEffect(() => {
-    storage.getItem("learnLang", "en").then((v) => {
-      if (v === "es" || v === "en") setLangState(v);
-    });
-    storage.getItem("mixedMode", "false").then((v) => {
-      if (v === "true") setMixedState(true);
-    });
+    // App is English-only now. Force English mode and clear any old preference.
+    storage.setItem("learnLang", "en");
+    storage.setItem("mixedMode", "false");
   }, []);
 
   const setLang = (l: LearnLang) => {
