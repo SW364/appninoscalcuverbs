@@ -52,3 +52,11 @@ App educativa de gramática EN/ES/Mixto. El usuario pidió convertirla en la
 - expo-doctor: 19/20 (único aviso restante = carpeta android/ prebuild ya existente, no bloquea).
 - Verificado por testing_agent (iteration_5): sin errores de runtime, todas las pantallas OK.
 - Ahora compatible con Expo Go SDK 57.
+
+## Actualización (2026-09-25) — Pantalla de bienvenida (Tita)
+- `app/index.tsx` ahora es una pantalla de bienvenida (splash) con la imagen de Tita
+  ("Hola, Yo soy Tita") y animación fade+scale; tras 1.8s hace router.replace("/home").
+- El menú principal se movió a `app/home.tsx` (mismo contenido).
+- Imagen guardada en `assets/images/tita-welcome.png`; se removió el fondo cuadriculado
+  quemado (se hizo transparente conservando la niña y el cartel).
+- Verificado por testing_agent (iteration_6): splash + auto-redirect + regresión OK.
